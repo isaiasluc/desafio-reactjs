@@ -69,7 +69,7 @@ const Card = styled.div`
 `;
 
 const Link = styled.a`
-    text-decoration: none;
+  text-decoration: none;
 `;
 
 const Repo = ({ repositorios }) => {
@@ -84,7 +84,7 @@ const Repo = ({ repositorios }) => {
 
   return (
     <Container>
-      {repositorios.map((repo) => {
+      {repositorios.sort((a,b) => b.stargazers_count - a.stargazers_count).map(repo => {
         return (
           <Card key={repo.id}>
             <Link href={repo.svn_url} target="_blank">
