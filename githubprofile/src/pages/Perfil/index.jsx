@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import GithubIcons from "../../components/GithubIcons";
 import UserInfo from "../../components/UserInfo";
-import Repo from '../../components/Repo';
+import Repo from "../../components/Repo";
 
 const Container = styled.div`
   display: grid;
@@ -80,15 +80,15 @@ const Back = styled.button`
   }
 `;
 
-const Voltar = styled(Link)`
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-`;
-
 export default function Perfil(state) {
   const [repos, setRepos] = useState([]);
   const data = state.location.state;
+
+  let history = useHistory();
+
+  function handleBack() {
+    history.push("/");
+  }
 
   useEffect(() => {
     const userName = data.login;
@@ -130,11 +130,9 @@ export default function Perfil(state) {
         />
         <br />
         <br />
-        <Voltar to="/">
-          <Back>
-            <span>Voltar</span>
-          </Back>
-        </Voltar>
+        <Back onClick={handleBack}>
+          <span>Voltar</span>
+        </Back>
       </LeftColumn>
       <RightColumn>
         <Repos>
