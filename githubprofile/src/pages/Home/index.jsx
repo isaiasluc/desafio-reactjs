@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import api from "../../services/api";
 import styled from "styled-components";
-import "./styles.css";
 import { Link } from "react-router-dom";
 import Lupa from "../../assets/search-icon.png";
 
@@ -16,6 +15,20 @@ const SearchText = styled.h1`
   font-weight: 400;
 `;
 
+const Homepage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+`;
+
+const SearchDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const SearchBar = styled.input`
   height: 50px;
   width: 400px;
@@ -25,7 +38,7 @@ const SearchBar = styled.input`
   padding-left: 20px;
 
   ::placeholder {
-    color: #8190A5;
+    color: #8190a5;
     font-family: Lato;
     font-size: 18px;
     font-style: italic;
@@ -35,7 +48,7 @@ const SearchBar = styled.input`
   }
 `;
 
-const SearchButton = styled.button`
+const Search = styled.button`
   background-color: #47525e;
   border-radius: 5px;
   width: 118px;
@@ -69,20 +82,19 @@ const StyledLink = styled(Link)`
 `;
 
 export default function Home() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const [disableButton, setDisableButton] = useState(true);
+  const [data, setData] = useState({});
 
-  const handleChangeUser = (e) => {
-    setValue(e.target.value);
+  async function handleSearchUser(e) {
+    const userName = e.target.value;
+    setValue(userName);
     setDisableButton(!disableButton);
-  };
-
-  const handleSearchUser = (e) => {
-    setValue(e.target.value);
-    api
-      .get(`${value}`)
+    
+    await api
+      .get(`${userName}`)
       .then((response) => {
-        console.log(response.data);
+        setData(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -90,23 +102,29 @@ export default function Home() {
   };
 
   return (
-    <div className="homepage">
+    <Homepage>
       <SearchText>Search Devs</SearchText>
-
-      <div className="search-bar">
+      <SearchDiv>
         <SearchBar
           type="text"
           placeholder="Type the username here"
           value={value}
-          onChange={handleChangeUser}
+          onChange={handleSearchUser}
         />
-        <StyledLink to="/perfil">
-          <SearchButton disabled={disableButton} onClick={handleSearchUser} value={value}>
+        <StyledLink
+          to={{
+            pathname: "/perfil",
+            state: data,
+          }}
+        >
+          <Search
+            disabled={disableButton}
+          >
             <SearchIcon src={Lupa} />
             <span>Buscar</span>
-          </SearchButton>
+          </Search>
         </StyledLink>
-      </div>
-    </div>
+      </SearchDiv>
+    </Homepage>
   );
 }
