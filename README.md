@@ -1,3 +1,7 @@
+# Link do projeto
+
+https://ghprofiledesafio.netlify.app/
+
 # Descrição do projeto
 
 O projeto consiste em desenvolver uma aplicação que busca um usuário do github e utilizando a api do github retornamos esses dados em tela como informações do perfil, repositórios, quantidades de likes e seguidores, etc.
