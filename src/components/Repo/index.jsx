@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Star from "../../assets/star.png";
-import { useEffect, useState } from 'react';
 
 const ItemContainer = styled.div`
   display: flex;
