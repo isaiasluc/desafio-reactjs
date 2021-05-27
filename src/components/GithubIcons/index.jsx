@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Heart from "../../assets/heart.png";
 import Star from "../../assets/star.png";
-import Following from "../../assets/following.png";
+import Followers from "../../assets/following.png";
 
 const StyledIcon = styled.img`
   background-color: transparent;
@@ -29,10 +29,10 @@ const GithubInfo = ({ following, followers, repos }) => {
   return (
     <div>
       <IconContainer>
-        <StyledIcon src={Following} />
-        <Span>{following} followers</Span>
+      <StyledIcon src={Followers} />
+        <Span>{followers} followers</Span>
         <StyledIcon src={Heart} />
-        <Span>{followers} following</Span>
+        <Span>{following} following</Span>
         <StyledIcon src={Star} />
         <Span>{repos} stars</Span>
       </IconContainer>
