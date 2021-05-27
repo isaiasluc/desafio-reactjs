@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import GithubIcons from "../../components/GithubIcons";
 import UserInfo from "../../components/UserInfo";
 import Repo from '../../components/Repo';
+import axios from 'axios';
 
 const Container = styled.div`
   display: grid;
@@ -56,6 +57,7 @@ const Bio = styled.p`
   font-family: Lato;
   font-size: 18px;
   text-align: left;
+  line-height: 28px;
 `;
 
 const Socials = styled.div``;
@@ -93,10 +95,9 @@ export default function Perfil(state) {
   useEffect(() => {
     const userName = data.login;
 
-    fetch(`https://api.github.com/users/${userName}/repos`)
-      .then((response) => response.json())
+    axios.get(`https://api.github.com/users/${userName}/repos`)
       .then((response) => {
-        setRepos(response);
+        setRepos(response.data);
       });
   }, [data.login]);
 

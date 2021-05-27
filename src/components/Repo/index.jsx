@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import Star from "../../assets/star.png";
+import { useEffect, useState } from 'react';
 
 const ItemContainer = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid #eceff4;
+  padding-bottom: 20px;
 `;
 
 const StyledIcon = styled.img`
@@ -73,7 +75,8 @@ const Link = styled.a`
 `;
 
 const Repo = ({ repositorios }) => {
-
+  console.log(repositorios)
+  
   const handleUpdate = (day) => {
     const now = new Date();
     const past = new Date(day);
